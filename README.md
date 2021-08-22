@@ -54,7 +54,7 @@ The performance results of examples/perforamces_overview.py:
 |   | Direct  | Feature-Selection  | PCA  | AutoCPCA  |
 |:---:|:---:|:---:|:---:|:---:|
 | best mean of 10-CV-scoring  | 0.96  | 0.969 | 0.955  | **0.988**  |
-|  std of best 10-CV-scoring  | 0.192  | 0.196 | 0.0218   | **0.0137**  |
+|  std of best 10-CV-scoring  | 0.0192  | 0.0196 | 0.0218   | **0.0137**  |
 
 ## References
 [1] Abid, Abubakar and Zhang, Martin J and Bagaria, Vivek K and Zou, James: [Exploring Patterns Enriched in a Dataset with Contrastive Principal Component Analysis](https://www.nature.com/articles/s41467-018-04608-8.pdf), *Nature Communications* (2018)
