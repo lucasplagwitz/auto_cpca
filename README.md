@@ -1,21 +1,21 @@
 # AutoCPCA 
 Automatic Contrasitve Priniciple Components Analysis (AutoCPCA) is a python library to perform a supervised version 
 of the well-know dimensional reduction technique PCA.
-This is an adaption to reference [1]. Install via pip
+This is an adaptation of reference [1]. Install via pip
 
     pip install git+https://github.com/lucasplagwitz/auto_cpca
 
 ## Concept
 
-The concept is based on the work in reference [1] and weights dimensions based on 
+The concept is based on the work in reference [1] and weights feature-dimensions based on 
 fore- and background. In this case, backgrounds are automatically defined on the given class labels. 
 Thus, high variance within the class is penalized and the dimensions to distinguish between classes are emphasized. 
 
 In particular we solve:
 <p align="center">
-<img src="https://render.githubusercontent.com/render/math?math=\Large \argmax_u \lambda_{X}(u) - \sum_{c \in n_classes} \alpha_c \lambda_{X_{y==c}}(u)">
+<img src="https://render.githubusercontent.com/render/math?math=\Large \argmax_u \lambda_{X}(u) - \sum_{c \in {classes}} \alpha_c \lambda_{X_{y = c}}(u)">
  <p/>
-where ...
+where <img src="https://render.githubusercontent.com/render/math?math=\Large \lambda_{X}(u) := u^TC_Xu" > and <img src="https://render.githubusercontent.com/render/math?math=\Large C_X"> the covariance matrix and <img src="https://render.githubusercontent.com/render/math?math=\Large \alpha_c" > a weighting paramater.
 
 To demonstrate the behavior, the following figure shows the result on example mnist_2d_plot.py. 
 
@@ -57,5 +57,4 @@ The performance results of examples/perforamces_overview.py:
 |  std of best 10-CV-scoring  | 0.192  | 0.196 | 0.0218   | **0.0137**  |
 
 ## References
-[1] Abid, Abubakar and Zhang, Martin J and Bagaria, Vivek K and Zou, James: `"Exploring Patterns Enriched in a Dataset with Contrastive Principal Component Analysis"
-<https://www.nature.com/articles/s41467-018-04608-8.pdf/>`_, *Nature Communications* (2018)
+[1] Abid, Abubakar and Zhang, Martin J and Bagaria, Vivek K and Zou, James: [Exploring Patterns Enriched in a Dataset with Contrastive Principal Component Analysis](https://www.nature.com/articles/s41467-018-04608-8.pdf), *Nature Communications* (2018)
