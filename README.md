@@ -1,6 +1,6 @@
 # AutoCPCA 
 Automatic Contrasitve Priniciple Components Analysis (AutoCPCA) is a python library to perform a supervised version 
-of the well-know dimensional reduction technique PCA.
+of the well-known dimensional reduction technique PCA.
 This is an adaptation of reference [1]. Install via pip
 
     pip install git+https://github.com/lucasplagwitz/auto_cpca
