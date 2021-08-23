@@ -17,7 +17,7 @@ class TestAutoCPCA(unittest.TestCase):
                            'SVC__C': [1, 10]}
         auto_cpca_pipe = Pipeline([("AutoCPCA", AutoCPCA(verbose=0)), ("SVC", SVC())])
 
-        # -- AutoPCA -> SVC --
+        # -- AutoCPCA -> SVC --
         clf = GridSearchCV(auto_cpca_pipe, cpca_parameters,
                            cv=StratifiedShuffleSplit(n_splits=10, test_size=.2, random_state=42))
 

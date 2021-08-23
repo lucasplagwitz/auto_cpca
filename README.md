@@ -17,7 +17,7 @@ In particular we solve:
  <p/>
 where <img src="https://render.githubusercontent.com/render/math?math=\Large \lambda_{X}(u) := u^TC_Xu" > and <img src="https://render.githubusercontent.com/render/math?math=\Large C_X"> the covariance matrix and <img src="https://render.githubusercontent.com/render/math?math=\Large \alpha_c" > a weighting paramater.
 
-To demonstrate the behavior, the following figure shows the result on example mnist_2d_plot.py. 
+To demonstrate the behavior, the following figure shows the result on example examples/mnist_2d_plot.py. 
 
 <p align="center">
 <img src="./demo/mnist_2d.png">
@@ -38,7 +38,7 @@ from sklearn.datasets import fetch_olivetti_faces
 
 from auto_cpca import AutoCPCA
 
-cpca_parameters = {'AutoCPCA__n_components': [5, 50, None],
+cpca_parameters = {'AutoCPCA__n_components': [5, 50, 100, None],
                    'AutoCPCA__alpha': [.1, 1, 5],
                    'SVC__C': [1, 10]}
 
@@ -53,8 +53,8 @@ The performance results of examples/perforamces_overview.py:
 
 |   | Direct  | Feature-Selection  | PCA  | AutoCPCA  |
 |:---:|:---:|:---:|:---:|:---:|
-| best mean of 10-CV-scoring  | 0.96  | 0.969 | 0.955  | **0.988**  |
-|  std of best 10-CV-scoring  | 0.0192  | 0.0196 | 0.0218   | **0.0137**  |
+| best mean of 15-CV-scoring  | 0.959  | 0.968 | 0.956  | **0.99**  |
+|  std of best 15-CV-scoring  | 0.0191  | 0.0176 | 0.0198   | **0.0114**  |
 
 ## References
 [1] Abid, Abubakar and Zhang, Martin J and Bagaria, Vivek K and Zou, James: [Exploring Patterns Enriched in a Dataset with Contrastive Principal Component Analysis](https://www.nature.com/articles/s41467-018-04608-8.pdf), *Nature Communications* (2018)
