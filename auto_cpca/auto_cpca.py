@@ -104,8 +104,9 @@ class AutoCPCA(TransformerMixin, BaseEstimator):
         check_classification_targets(y)
         self.classes_ = np.unique(y)
 
-        if isinstance(self.alpha, dict) and len(self.alpha) != len(self.classes_):
-            raise ValueError("Length missmatched")
+        if isinstance(self.alpha, dict) and set(self.alpha.keys()) != set(self.classes_):
+            raise ValueError("The keys of the given weighting dict alpha "
+                             "does not match the class labels in the target y.")
 
         if self.n_components is None:
             self.n_components = min(np.min(X.shape), self.preprocess_with_pca_dim) - 1
@@ -129,18 +130,23 @@ class AutoCPCA(TransformerMixin, BaseEstimator):
         self.fg_cov = np.cov(fg.T)
 
         if self.norm_cov_mean:
-            warnings.warn("The benefit of norm_cov_mean has not been considered.")
+            warnings.warn("The benefit of norm_cov_mean has not been shown.")
             for key in self.bg_cov.keys():
                 self.bg_cov[key] = self.bg_cov[key] - self.bg_cov[key].mean(axis=0)
             self.fg_cov = (self.fg_cov - self.fg_cov.mean(axis=0))
 
         if self.alpha == "auto":
-            msg = "Not yet."
+            msg = "Not ready yet - please use hyperparameter optimization for the alpha-choice. " \
+                  "A suitable selection-algorithm will follow in the future. "
+            raise NotImplementedError(msg)
             alpha = self._optimal_alpha(X, y)
         elif isinstance(self.alpha, dict):
             alpha = self.alpha
         elif isinstance(self.alpha, (int, float)):
             alpha = {label: self.alpha for label in self.classes_}
+        else:
+            msg = f"AutoCPCA requires alpha to be a dict or number."
+            raise ValueError(msg)
         self._create_component(alpha=alpha)
 
         return self
@@ -185,6 +191,9 @@ class AutoCPCA(TransformerMixin, BaseEstimator):
             Weighted sum of positive feature-influence in principle component.
         """
         check_is_fitted(self)
+        if self.pca is not None:
+            raise ValueError("The feature_influence method is at this point only available "
+                             "when n_feauters <  preprocess_with_pca_dim.")
         return np.sum(weight*np.abs(self.components_), axis=1)
 
     def inverse_transform(self, X, y=None):
@@ -225,10 +234,6 @@ class AutoCPCA(TransformerMixin, BaseEstimator):
 
     def _optimal_alpha(self, X, y, metric=balanced_accuracy_score, start_value=1, n_iter=500):
         """Optimal parameter-selection procedure."""
-        msg = "Not ready yet - please use hyperparameter optimization for the alpha-choice. " \
-              "A suitable selection-algorithm will follow in the future. "
-        raise NotImplemented(msg)
-
         if np.issubdtype(self.alpha, np.integer):
             alpha = np.array([self.alpha] * len(self.classes_))
         elif isinstance(self.alpha, np.ndarray):
