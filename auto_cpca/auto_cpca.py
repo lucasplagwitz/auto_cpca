@@ -188,13 +188,13 @@ class AutoCPCA(TransformerMixin, BaseEstimator):
 
         Returns
         -------
-            Weighted sum of positive feature-influence in principle component.
+            influence: Weighted sum of positive feature-influence in principle component.
         """
         check_is_fitted(self)
+        influence = np.sum(weight*np.abs(self.components_), axis=1)
         if self.pca is not None:
-            raise ValueError("The feature_influence method is at this point only available "
-                             "when n_feauters <  preprocess_with_pca_dim.")
-        return np.sum(weight*np.abs(self.components_), axis=1)
+            influence = np.sum(influence * np.abs(self.pca.components_).T, axis=1)
+        return influence
 
     def inverse_transform(self, X, y=None):
         """Transform data back to its original space.

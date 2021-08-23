@@ -90,9 +90,7 @@ class TestAutoCPCA(unittest.TestCase):
         assert auto_cpca.pca is not None
         assert auto_cpca.transform(X).shape == (X.shape[0], 5)
         assert auto_cpca.inverse_transform(auto_cpca.transform(X)).shape == X.shape
-
-        with self.assertRaises(ValueError):
-            auto_cpca.feature_influence()
+        assert auto_cpca.feature_influence().shape == (X.shape[1], )
 
     def test_norm_cov_mean(self):
         X, y = load_iris(return_X_y=True)
