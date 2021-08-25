@@ -10,6 +10,8 @@ This is an adaptation of reference [1]. Install via pip
 The concept is based on the work in reference [1] and weights feature-dimensions based on 
 fore- and background. In this case, backgrounds are automatically defined on the given class labels. 
 Thus, high variance within the class is penalized and the dimensions to distinguish between classes are emphasized. 
+This results in a similar formulation to the Fisher discriminant analysis: finding a reduced representation of the data such that 
+intraclass variation is minimized while interclass variation is maximized.
 
 In particular we solve:
 <p align="center">
@@ -24,7 +26,7 @@ To demonstrate the behavior, the following figure shows the result on example ex
 </p>
 
 To better distinguish 2 and 7 from the rest, the dissimilarity of all digits except 2 and 7 is penalized.
-
+The investigation of advantages and disadvantages to the LDA/QDA and general purposes is still in progress.
 
 ## Performance
 
@@ -49,12 +51,20 @@ X, y = fetch_olivetti_faces(return_X_y=True)
 clf.fit(X, y)
 ```
 
-The performance results of examples/perforamces_overview.py:
+The performance results of examples/perforamce_faces.py:
 
-|   | Direct  | Feature-Selection  | PCA  | AutoCPCA  |
-|:---:|:---:|:---:|:---:|:---:|
-| best mean of 15-CV-scoring  | 0.959  | 0.968 | 0.956  | **0.99**  |
-|  std of best 15-CV-scoring  | 0.0191  | 0.0176 | 0.0198   | **0.0114**  |
+|   | Direct  | Feature-Selection  | PCA  | LDA | AutoCPCA  |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| best mean of 15-CV-scoring  | 0.959  | 0.968 | 0.957  | **0.99** | **0.99**  |
+|  std of best 15-CV-scoring  | 0.0191  | 0.0176 | 0.0198 | **0.0131** | **0.0114**  |
+
+Results of examples/performance_mouse.py:
+
+|   | Direct  | Feature-Selection  | PCA | LDA | AutoCPCA  |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| best mean of 15-CV-scoring  | 0.735  | 0.609 | 0.715  | 0.692 | **0.851**  |
+|  std of best 15-CV-scoring  | 0.0191  | 0.0176 | 0.0437  | 0.072 | **0.0587**  |
+
 
 ## References
 [1] Abid, Abubakar and Zhang, Martin J and Bagaria, Vivek K and Zou, James: [Exploring Patterns Enriched in a Dataset with Contrastive Principal Component Analysis](https://www.nature.com/articles/s41467-018-04608-8.pdf), *Nature Communications* (2018)
