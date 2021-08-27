@@ -61,8 +61,11 @@ fs_std = clf.cv_results_["std_test_score"][np.argmax(clf.cv_results_["mean_test_
 # -- LDA --
 lda_max_all = lda_max = 0
 best_lda = ""
+lda_grid_01 = {"LDA__n_components": [3, 5, None]}
+lda_grid_02 = {"LDA__n_components": [3, 5, None]}
+lda_grid_03 = {}
 for num in ["01", "02", "03"]:
-    clf = GridSearchCV(eval("lda_pipe_"+num), {}, cv=cv, n_jobs=8)
+    clf = GridSearchCV(eval("lda_pipe_"+num), eval("lda_grid_"+num) , cv=cv, n_jobs=8)
     clf.fit(X, y)
     lda_max = np.max(clf.cv_results_["mean_test_score"])
     lda_std = clf.cv_results_["std_test_score"][np.argmax(clf.cv_results_["mean_test_score"])]

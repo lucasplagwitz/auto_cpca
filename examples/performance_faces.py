@@ -1,6 +1,6 @@
 import numpy as np
 
-from sklearn.datasets import  fetch_olivetti_faces
+from sklearn.datasets import fetch_olivetti_faces
 from sklearn.svm import SVC
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV, StratifiedShuffleSplit

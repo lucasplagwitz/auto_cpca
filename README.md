@@ -19,13 +19,13 @@ In particular we solve:
  <p/>
 where <img src="https://render.githubusercontent.com/render/math?math=\Large \lambda_{X}(u) := u^TC_Xu" > and <img src="https://render.githubusercontent.com/render/math?math=\Large C_X"> the covariance matrix and <img src="https://render.githubusercontent.com/render/math?math=\Large \alpha_c" > a weighting paramater.
 
-To demonstrate the behavior, the following figure shows the result on example examples/mnist_2d_plot.py. 
+This reudction method seems to perform well on datasets with very small samples at high feature counts.
+To demonstrate the behavior, the following figure shows the result on example examples/features_per_sample_comparison.py
 
 <p align="center">
-<img src="./demo/mnist_2d.png">
+<img src="./demo/performance_feature_sample_ratio.png">
 </p>
 
-To better distinguish 2 and 7 from the rest, the dissimilarity of all digits except 2 and 7 is penalized.
 The investigation of advantages and disadvantages to the LDA/QDA and general purposes is still in progress.
 
 ## Performance
