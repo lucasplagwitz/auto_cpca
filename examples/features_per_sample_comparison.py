@@ -63,6 +63,9 @@ for num_c, n_samples in enumerate([200, 500]):
     ax[num_c].plot(features_samples_ratio, acc_clf[3], linewidth=2, color='green')
     ax[num_c].plot(features_samples_ratio, acc_clf[4], linewidth=2, color='purple')
 
+    if num_c == 0:
+        ax[num_c].set_ylabel('Classification accuracy')
+
     ax[num_c].set_xlabel('n_features / n_samples')
 
     ax[num_c].set_title(f"{int(n_samples*train_test_ratio)} train samples")
